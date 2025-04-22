@@ -8,6 +8,13 @@ on:
     types: [opened, synchronize, reopened]
     branches:
       - main
+
+# we need these permissions to deploy the react template to github pages
+permissions:
+  id-token: write
+  pages: write
+  contents: read
+
 jobs:
     build:
         runs-on: ubuntu-latest
