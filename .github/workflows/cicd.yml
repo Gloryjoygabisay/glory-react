@@ -23,3 +23,14 @@ jobs:
           run: npm run build
         - name: Test
           run: npm run test
+        - name: upload pages artifact
+          uses:  actions/upload-pages-artifact@v3.0.1
+          with:
+            path: ${{ github.workspace }}/dist/
+        - name: deploy pages artifact
+          id: deploy-pages-artifact
+          uses: actions/deploy-pages@v4.0.5
+        - name: show deployed url
+          run: |
+            # show deployed URL for github pages
+            echo "📚 Deployed pages to ${{ steps.deploy-pages-artifact.outputs.page_url }}" | tee -a $GITHUB_STEP_SUMMARY
