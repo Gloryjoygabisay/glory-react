@@ -1,0 +1,25 @@
+# build the react solution and test
+name: React CI/CD
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches:
+      - main
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+        - uses: actions/checkout@v4.1.7
+        - name: Use Node.js 23.x
+          uses: actions/setup-node@v4.3.0
+          with:
+            node-version: 23.x
+        - name: Install dependencies
+          run: npm install
+        - name: Build
+          run: npm run build
+        - name: Test
+          run: npm run test
